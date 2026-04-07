@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Password Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+
+        .box {
+            border: 2px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 90%;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        #message {
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h3>Password Checker</h3>
+
+        <input type="text" id="myPassword" placeholder="Type password here..." onkeyup="checkPassword()">
+
+        <p id="message">Enter a password</p>
+    </div>
+
+    <script>
+        function checkPassword() {
+            let typedPassword = document.getElementById("myPassword").value;
+            let messageElement = document.getElementById("message");
+            let score = 0;
+
+            if (typedPassword.length >= 8) {
+                score = score + 1;
+            }
+
+            if (/[0-9]/.test(typedPassword)) {
+                score = score + 1;
+            }
+
+            if (/[A-Z]/.test(typedPassword)) {
+                score = score + 1;
+            }
+
+            if (typedPassword.length === 0) {
+                messageElement.innerText = "Enter a password";
+                messageElement.style.color = "black";
+            }
+            else if (score === 0 || score === 1) {
+                messageElement.innerText = "Weak ❌";
+                messageElement.style.color = "red";
+            }
+            else if (score === 2) {
+                messageElement.innerText = "Medium ⚠️";
+                messageElement.style.color = "orange";
+            }
+            else if (score === 3) {
+                messageElement.innerText = "Strong ✅";
+                messageElement.style.color = "green";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
